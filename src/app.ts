@@ -12,7 +12,7 @@ setupDBConnection();
 const app = express();
 app.use(
     cors({
-        // origin: "http://localhost:4200",
+        origin: process.env.CORS_ORIGIN,
     })
 );
 app.use(express.json());

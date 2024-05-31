@@ -7,10 +7,11 @@ const getUsers = async (req: Request, res: Response) => {
 }
 
 const createdUser = async(req: Request, res: Response) => {
+    // console.log(req.body);
     const { name, mail } = req.body;
     const user = new User({
-        name: req.body.name,
-        mail: req.body.mail,
+        name: name,
+        mail: mail,
     });
 
     await user.save();
