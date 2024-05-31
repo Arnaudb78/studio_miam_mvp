@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import setupDBConnection from "./config/connection";
 import userRouter from "./routes/userRouter";
+import locationRouter from "./routes/locationRouter";
 
 dotenv.config();
 setupDBConnection();
@@ -17,10 +18,11 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-    res.status(200).send("Backend online");
-});
+// app.get("/", (req: Request, res: Response) => {
+//     res.status(200).send("Backend online");
+// });
 
+app.use("/", locationRouter);
 app.use("/users", userRouter);
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
