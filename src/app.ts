@@ -18,11 +18,11 @@ app.use(
 );
 app.use(express.json());
 
-// app.get("/", (req: Request, res: Response) => {
-//     res.status(200).send("Backend online");
-// });
+app.get("/", (req: Request, res: Response) => {
+    res.status(200).send("Backend online");
+});
 
-app.use("/", locationRouter);
+app.use("/locations", locationRouter);
 app.use("/users", userRouter);
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
