@@ -9,13 +9,14 @@ const getUsers = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
     if (!req.body) return res.status(400).send({ message: "User cannot be empty" });
-    const { firstname, lastname, mail, password, confirmPassword, newsletter } = req.body;
+    const { firstname, lastname, mail, password, confirmPassword, rules, newsletter } = req.body;
     const user = new User({
         firstname: firstname,
         lastname: lastname,
         mail: mail,
         password: password,
         confirmPassword: confirmPassword,
+        rules: rules,
         isNewsletter: newsletter,
     });
     const userId = { userId: user._id };
