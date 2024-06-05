@@ -23,6 +23,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/locations", locationRouter);
+
 app.use("/users", userRouter);
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
