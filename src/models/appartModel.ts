@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-const locationSchema = new mongoose.Schema({
+const appartSchema = new mongoose.Schema({
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+    },
     title: String,
     description: String,
     price: Number,
@@ -23,4 +27,4 @@ const locationSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model("locations", locationSchema);
+export default mongoose.model("locations", appartSchema);

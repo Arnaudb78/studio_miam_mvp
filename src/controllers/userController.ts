@@ -51,11 +51,10 @@ const loginUser = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
     if(!req.body) return res.status(400).send({ message: "User cannot be empty" });
-
+    
     const { mail } = req.body;
     const user = await User.findOne({ mail });
     if (!user) return res.status(403).send({ message: "User not found" });
-    
     await User.findByIdAndDelete(user._id);
     res.status(204).send({ message: "User deleted" });
 }

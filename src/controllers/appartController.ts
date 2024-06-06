@@ -1,14 +1,24 @@
 import { Request, Response } from "express";
-import Location from "../models/locationModel";
+import Location from "../models/appartModel";
 
-const getAllLocations = async (req: Request, res: Response) => {
+const getAllApparts = async (req: Request, res: Response) => {
     const locations = await Location.find();
     res.status(200).json(locations);
 };
 
-const createLocation = async (req: Request, res: Response) => {
+const getAppartByUser = async (req: Request, res: Response) => {
+    console.log(req.params);
+//     if(!req.params) return res.status(400).send({ message: "No data found"});
+//     const { _id } = req.body;
+//     const location = await Location.findOne({user: _id});
+//     if(!location) return res.status(404).send({ message: "no appartement for this user"});
+//     res.status(200).json(location);
+}
+
+const createAppart = async (req: Request, res: Response) => {
     if (!req.body) return res.status(400).send({ message: "Location cannot be empty" });
     const location = new Location({
+        user_id: req.body.user_id,
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
@@ -34,4 +44,4 @@ const createLocation = async (req: Request, res: Response) => {
     res.status(201).json(location);
 };
 
-export { getAllLocations, createLocation };
+export { getAllApparts, getAppartByUser, createAppart };
