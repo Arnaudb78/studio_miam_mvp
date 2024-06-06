@@ -1,23 +1,22 @@
 import { Request, Response } from "express";
-import Location from "../models/appartModel";
+import Appart from "../models/appartModel";
 
 const getAllApparts = async (req: Request, res: Response) => {
-    const locations = await Location.find();
-    res.status(200).json(locations);
+    const apparts = await Appart.find();
+    res.status(200).json(apparts);
 };
 
 const getAppartByUser = async (req: Request, res: Response) => {
-    console.log(req.params);
-//     if(!req.params) return res.status(400).send({ message: "No data found"});
-//     const { _id } = req.body;
-//     const location = await Location.findOne({user: _id});
-//     if(!location) return res.status(404).send({ message: "no appartement for this user"});
-//     res.status(200).json(location);
+    const userId = req.query.user_id;
+    if(!userId) return res.status(400).send({ message: "User id is required" });
+    const apparts = await Appart.find({ user_id: userId });
+    if(!apparts) return res.status(404).send({ message: "No appart found" });
+    res.status(200).json(apparts);
 }
 
 const createAppart = async (req: Request, res: Response) => {
-    if (!req.body) return res.status(400).send({ message: "Location cannot be empty" });
-    const location = new Location({
+    if (!req.body) return res.status(400).send({ message: "appart cannot be empty" });
+    const appart = new Appart({
         user_id: req.body.user_id,
         title: req.body.title,
         description: req.body.description,
@@ -40,8 +39,8 @@ const createAppart = async (req: Request, res: Response) => {
             jacuzzi: req.body.accessories.jacuzzi,
         },
     });
-    await location.save();
-    res.status(201).json(location);
+    await appart.save();
+    res.status(201).json(appart);
 };
 
 export { getAllApparts, getAppartByUser, createAppart };

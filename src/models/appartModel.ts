@@ -27,4 +27,4 @@ const appartSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model("locations", appartSchema);
+export default mongoose.model("apparts", appartSchema);
