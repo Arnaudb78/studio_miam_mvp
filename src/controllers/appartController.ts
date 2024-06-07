@@ -21,8 +21,15 @@ const createAppart = async (req: Request, res: Response) => {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
-        date: req.body.date,
-        localisation: req.body.localisation,
+        time: req.body.time,
+        localisation: {
+            address: req.body.localisation.address,
+            complementary_address: req.body.localisation.complementary_address,
+            city: req.body.localisation.city,
+            zip_code: req.body.localisation.zip_code,
+            country: req.body.localisation.country,
+        
+        },
         hote: req.body.hote,
         people_number: req.body.people_number,
         room_number: req.body.room_number,

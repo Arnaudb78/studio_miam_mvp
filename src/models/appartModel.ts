@@ -8,8 +8,16 @@ const appartSchema = new mongoose.Schema({
     title: String,
     description: String,
     price: Number,
-    date: Date,
-    localisation: String,
+    time: [
+        { type: String, enum: ["10-12", "12-14", "14-16", "16-18", "18-20", "20-22"] },
+    ],
+    localisation: {
+        "address": String,
+        "complementary_address": String,
+        "city": String,
+        "zip_code": Number,
+        "country": String,
+    },
     hote: String,
     people_number: Number,
     room_number: Number,
