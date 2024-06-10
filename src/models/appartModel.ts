@@ -8,20 +8,19 @@ const appartSchema = new mongoose.Schema({
     title: String,
     description: String,
     price: Number,
-    time: [
-        { type: String, enum: ["10-12", "12-14", "14-16", "16-18", "18-20", "20-22"] },
-    ],
+    time: [{ type: String, enum: ["10-12", "12-14", "14-16", "16-18", "18-20", "20-22"] }],
     localisation: {
-        "address": String,
-        "complementary_address": String,
-        "city": String,
-        "zip_code": Number,
-        "country": String,
+        address: String,
+        complementary_address: String,
+        city: String,
+        zip_code: Number,
+        country: String,
     },
     hote: String,
     people_number: Number,
+    type: String,
     room_number: Number,
-    equipements:{
+    equipements: {
         wifi: Boolean,
         tv: Boolean,
         clim: Boolean,
@@ -32,7 +31,7 @@ const appartSchema = new mongoose.Schema({
         chain: Boolean,
         cage: Boolean,
         jacuzzi: Boolean,
-    }
+    },
 });
 
 export default mongoose.model("apparts", appartSchema);
