@@ -16,6 +16,17 @@ const getAppartByUser = async (req: Request, res: Response) => {
     res.status(200).json(apparts);
 };
 
+const getAppartById = async (req: Request, res: Response) => {
+    if (!req.params.id) return res.status(400).send({ message: "Appart id is required" });
+    const { id } = req.params;
+    const appart = await Appart.findById(id);
+    if (appart) {
+        res.json(appart);
+    } else {
+        res.status(404).send("Appartement not found");
+    }
+};
+
 const createAppart = async (req: Request, res: Response) => {
     if (!req.body) return res.status(400).send({ message: "appart cannot be empty" });
     const localisation = req.body.appart.localisation;
@@ -57,4 +68,4 @@ const createAppart = async (req: Request, res: Response) => {
     res.status(201).json(appart);
 };
 
-export { getAllApparts, getAppartByUser, createAppart };
+export { getAllApparts, getAppartByUser, createAppart, getAppartById };
