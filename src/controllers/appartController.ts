@@ -9,11 +9,32 @@ const getAllApparts = async (req: Request, res: Response) => {
 };
 
 const getAppartByUser = async (req: Request, res: Response) => {
-    const userId = req.query.user_id;
+    const user = req.body;
+    const userId = user._id;
     if (!userId) return res.status(400).send({ message: "User id is required" });
-    const apparts = await Appart.find({ user_id: userId });
-    if (!apparts) return res.status(404).send({ message: "No appart found" });
-    res.status(200).json(apparts);
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).send({ message: "Invalid user id format" });
+    }
+
+    try {
+        const objectId = new mongoose.Types.ObjectId(userId);
+
+        const userExists = await User.findById(objectId);
+        if (!userExists) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        const apparts = await Appart.find({ user_id: objectId });
+        if (!apparts || apparts.length === 0) {
+            return res.status(404).send({ message: "No appart found" });
+        }
+
+        res.status(200).json(apparts);
+    } catch (error) {
+        console.error(`Error converting user id: ${error}`);
+        res.status(500).send({ message: "Server error" });
+    }
 };
 
 const getAppartById = async (req: Request, res: Response) => {
