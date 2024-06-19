@@ -4,6 +4,7 @@ import "express-async-errors";
 import dotenv from "dotenv";
 import cors from "cors";
 import setupDBConnection from "./config/connection";
+import newsLetterRouter from "./routes/newsLetterRouter";
 import userRouter from "./routes/userRouter";
 import appartRouter from "./routes/appartRouter";
 
@@ -22,6 +23,7 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200).send("Backend online");
 });
 
+app.use("/newsletter", newsLetterRouter);
 app.use("/apparts", appartRouter);
 app.use("/users", userRouter);
 
