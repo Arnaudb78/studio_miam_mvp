@@ -12,6 +12,9 @@ dotenv.config();
 setupDBConnection();
 
 const app = express();
+
+const allowedOrigins = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_LP];
+
 app.use(
     cors({
         origin: "*",
