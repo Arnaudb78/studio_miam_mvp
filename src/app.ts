@@ -15,7 +15,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "https://studio-miam-mvp-frontend.vercel.app/" || "https://vitfesse.arnaud-beaulieu.com/",
+        origin: "*",
     })
 );
 app.use(express.json()); 
