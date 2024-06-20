@@ -13,11 +13,11 @@ setupDBConnection();
 
 const app = express();
 
-const allowedOrigins = [process.env.CORS_ORIGIN!, process.env.CORS_ORIGIN_LP!];
+const allowedOrigins = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_LP];
 
 app.use(
     cors({
-        origin: allowedOrigins,
+        origin: "https://studio-miam-mvp-frontend.vercel.app/" || "https://vitfesse.arnaud-beaulieu.com/",
     })
 );
 app.use(express.json());
