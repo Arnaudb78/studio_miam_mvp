@@ -13,14 +13,12 @@ setupDBConnection();
 
 const app = express();
 
-const allowedOrigins = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_LP];
-
 app.use(
     cors({
-        origin: "*",
+        origin: "https://studio-miam-mvp-frontend.vercel.app/" || "https://vitfesse.arnaud-beaulieu.com/",
     })
 );
-app.use(express.json());
+app.use(express.json()); 
 
 app.get("/", (req: Request, res: Response) => {
     res.status(200).send("Backend online");
