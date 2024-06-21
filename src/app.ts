@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: [process.env.CORS_ORIGIN!, process.env.CORS_ORIGIN_LP!],
+        origin: ["https://studio-miam-mvp-frontend.vercel.app", "https://vitfesse.arnaud-beaulieu.com"],
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"],
     })
@@ -24,7 +24,7 @@ app.use(
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-    res.status(200).send("Backend online!");
+    res.status(200).send("Backend online");
 });
 
 app.use("/newsletter", newsLetterRouter);
