@@ -7,6 +7,7 @@ import setupDBConnection from "./config/connection";
 import newsLetterRouter from "./routes/newsLetterRouter";
 import userRouter from "./routes/userRouter";
 import appartRouter from "./routes/appartRouter";
+import articleRouter from "./routes/articleRouter";
 
 dotenv.config();
 setupDBConnection();
@@ -27,6 +28,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/newsletter", newsLetterRouter);
 app.use("/apparts", appartRouter);
 app.use("/users", userRouter);
+app.use("/articles", articleRouter);
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
     console.log("AAAAAA", err.message);
