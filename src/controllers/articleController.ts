@@ -6,6 +6,17 @@ const getArticles = async (req: Request, res: Response) => {
     res.status(200).json(users);
 };
 
+const getArticleById = async (req: Request, res: Response) => {
+    if (!req.params.id) return res.status(400).send({ message: "Appart id is required" });
+    const { id } = req.params;
+    const article = await Article.findById(id);
+    if (article) {
+        res.json(article);
+    } else {
+        res.status(404).send("Appartement not found");
+    }
+};
+
 const createArticle = async (req: Request, res: Response) => {
     if (!req.body) return res.status(400).send({ message: "Article cannot be empty" });
     const { title, description, content, author } = req.body;
@@ -25,4 +36,4 @@ const createArticle = async (req: Request, res: Response) => {
 };
 
 
-export {getArticles, createArticle};
+export {getArticles, getArticleById, createArticle};

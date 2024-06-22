@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 const getAllApparts = async (req: Request, res: Response) => {
     const apparts = await Appart.find();
+    if(!apparts) return res.status(404).send("No appart found");
     res.status(200).json(apparts);
 };
 
