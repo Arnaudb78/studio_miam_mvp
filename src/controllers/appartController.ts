@@ -51,17 +51,18 @@ const getAppartById = async (req: Request, res: Response) => {
 
 const createAppart = async (req: Request, res: Response) => {
     if (!req.body) return res.status(400).send({ message: "appart cannot be empty" });
-    const localisation = req.body.appart.localisation;
-    const equipements = req.body.appart.equipements;
-    const accessories = req.body.appart.accessories;
-    const user = await User.findOne({ mail: req.body.mail });
+
+    const { appart, mail } = req.body;
+    const { localisation, equipements, accessories, images } = appart;
+    const user = await User.findOne({ mail });
     if (!user) return res.status(404).send({ message: "User not found" });
-    const appart = new Appart({
+
+    const newAppart = new Appart({
         user_id: user._id,
-        title: req.body.appart.title,
-        description: req.body.appart.description,
-        price: req.body.appart.price,
-        time: req.body.appart.time,
+        title: appart.title,
+        description: appart.description,
+        price: appart.price,
+        time: appart.time,
         localisation: {
             address: localisation.address,
             complementary_address: localisation.complementary_address,
@@ -69,10 +70,10 @@ const createAppart = async (req: Request, res: Response) => {
             zip_code: localisation.zip_code,
             country: localisation.country,
         },
-        hote: user.firstname + " " + user.lastname,
-        people_number: req.body.appart.people_number,
-        type: req.body.appart.type,
-        room_number: req.body.appart.room_number,
+        hote: `${user.firstname} ${user.lastname}`,
+        people_number: appart.people_number,
+        type: appart.type,
+        room_number: appart.room_number,
         equipements: {
             wifi: equipements.wifi,
             tv: equipements.tv,
@@ -85,9 +86,15 @@ const createAppart = async (req: Request, res: Response) => {
             cage: accessories.cage,
             jacuzzi: accessories.jacuzzi,
         },
+        images: images,
     });
-    await appart.save();
-    res.status(201).json(appart);
+
+    try {
+        const savedAppart = await newAppart.save();
+        res.status(201).json(savedAppart);
+    } catch (error) {
+        res.status(500).send({ message: "Error saving appart", error });
+    }
 };
 
 export { getAllApparts, getAppartByUser, createAppart, getAppartById };

@@ -32,6 +32,7 @@ const appartSchema = new mongoose.Schema({
         cage: Boolean,
         jacuzzi: Boolean,
     },
+    images: [String],
 });
 
 export default mongoose.model("apparts", appartSchema);
