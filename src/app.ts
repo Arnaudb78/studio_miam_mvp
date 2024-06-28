@@ -14,19 +14,15 @@ setupDBConnection();
 
 const app = express();
 
-// app.use(
-//     cors({
-//         origin: ["https://studio-miam-mvp-frontend.vercel.app", "https://vitfesse.arnaud-beaulieu.com"],
-//         credentials: true,
-//         allowedHeaders: ["Content-Type", "Authorization"],
-//     })
-// );
-
 app.use(
     cors({
-        origin: "*",
+        origin: ["https://studio-miam-mvp-frontend.vercel.app", "https://vitfesse.arnaud-beaulieu.com"],
+        credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
+
+
 
 app.use(express.json());
 
