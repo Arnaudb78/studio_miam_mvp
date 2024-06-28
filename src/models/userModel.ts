@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     rules: Boolean,
     isNewsletter: Boolean,
     accessToken: String,
+    pic: String,
 });
 
 export default mongoose.model("users", userSchema);

@@ -56,7 +56,6 @@ const createAppart = async (req: Request, res: Response) => {
     const { localisation, equipements, accessories, images } = appart;
     const user = await User.findOne({ mail });
     if (!user) return res.status(404).send({ message: "User not found" });
-
     const newAppart = new Appart({
         user_id: user._id,
         title: appart.title,

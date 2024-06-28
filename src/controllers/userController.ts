@@ -8,10 +8,21 @@ const getUsers = async (req: Request, res: Response) => {
     res.status(200).json(users);
 };
 
+const getUserById = async (req: Request, res: Response) => {
+    if (!req.params.id) return res.status(400).send({ message: "User id is required" });
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).send("User not found");
+    }
+};
+
 const createUser = async (req: Request, res: Response) => {
     if (!req.body) return res.status(400).send({ message: "User cannot be empty" });
-    const { firstname, lastname, mail, password, rules, newsletter } = req.body;
-
+    const { firstname, lastname, mail, password, rules, newsletter, picUrl } = req.body;
+    console.log(picUrl);
     if (await User.findOne({ mail: mail })) return res.status(400).send({ message: "User already exists" });
     const passwordHash = await bcrypt.hash(password, 10);
     const user = new User({
@@ -21,6 +32,7 @@ const createUser = async (req: Request, res: Response) => {
         password: passwordHash,
         rules: rules,
         isNewsletter: newsletter,
+        pic: picUrl,
     });
     const userId = { userId: user._id };
     const accessToken = jwt.sign(userId, "private_key", { expiresIn: "1h" });
@@ -99,4 +111,4 @@ const deleteUser = async (req: Request, res: Response) => {
 //     user.isNewsletter = isNewsletter;
 // }
 
-export { getUsers, createUser, loginUser, deleteUser };
+export { getUsers, createUser, loginUser, deleteUser, getUserById };
