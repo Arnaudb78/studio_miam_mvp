@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: ["https://studio-miam-mvp-frontend.vercel.app", "https://vitfesse.arnaud-beaulieu.com"],
+        origin: ["https://vitfesse.vercel.app", "https://vitfesse.arnaud-beaulieu.com"],
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"],
     })
