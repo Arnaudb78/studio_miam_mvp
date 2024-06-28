@@ -3,11 +3,6 @@ import User from "../models/userModel";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-const getUsers = async (req: Request, res: Response) => {
-    const users = await User.find();
-    res.status(200).json(users);
-};
-
 const getUserById = async (req: Request, res: Response) => {
     if (!req.params.id) return res.status(400).send({ message: "User id is required" });
     const { id } = req.params;
@@ -111,4 +106,4 @@ const deleteUser = async (req: Request, res: Response) => {
 //     user.isNewsletter = isNewsletter;
 // }
 
-export { getUsers, createUser, loginUser, deleteUser, getUserById };
+export {createUser, loginUser, deleteUser, getUserById };
