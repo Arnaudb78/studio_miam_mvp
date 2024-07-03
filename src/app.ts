@@ -44,7 +44,7 @@ app.use((err: Error, req: Request, res: Response, next: Function) => {
 
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
-    console.log("Server online !");
+    console.log("Server online");
 });
 
 export default app;

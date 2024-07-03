@@ -50,6 +50,7 @@ const getAppartById = async (req: Request, res: Response) => {
 };
 
 const createAppart = async (req: Request, res: Response) => {
+    console.log(req.body); 
     if (!req.body) return res.status(400).send({ message: "appart cannot be empty" });
 
     const { appart, mail } = req.body;
